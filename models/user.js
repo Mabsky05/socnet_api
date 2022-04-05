@@ -2,33 +2,28 @@ const { Schema, Types } = require('mongoose');
 
 const userSchema = new Schema(
   {
-    userId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
-    assignmentName: {
+    username: {
       type: String,
+      unique: true,
       required: true,
-      maxlength: 50,
-      minlength: 4,
-      default: 'Unnamed assignment',
+      trimmed: true,
     },
-    score: {
-      type: Number,
+    email: {
+      type: String,
+      unique: true,
       required: true,
-      default: () => Math.floor(Math.random() * (100 - 70 + 1) + 70),
+      //must match valid email address, see mongoose matching validation
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
+    thoughts: {
+      //array of _id values referencing Thought model
+    },
+    friends: {
+      //array of _id values referencing User model (self-reference)
     },
   },
-  {
-    toJSON: {
-      getters: true,
-    },
-    id: false,
-  }
 );
+// Create a virtual called friendCount that 
+// retrieves the length of the user's 
+// friends array field on query.
 
-module.exports = assignmentSchema;
+module.exports = userSchema;
