@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const thoughtSchema = new Schema(
+const thought = new Schema(
   {
     thoughtText: {
       type: String,
@@ -12,10 +12,10 @@ const thoughtSchema = new Schema(
       //set default to current timestamp
       lastActiveAt: Date,
 
-      default: lastActiveAt,
+      default: Date,
 
       //getter method to format timestamp on query
-      get: update,
+      // get: update,
     },
     username: {
       type: String,
@@ -28,4 +28,4 @@ const thoughtSchema = new Schema(
   }
 );
 
-module.exports = thoughtSchema;
+module.exports = thought;
