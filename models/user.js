@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const user = new mongoose.Schema(
+const User = new mongoose.Schema(
   {
     username: {
       type: String,
@@ -26,4 +26,4 @@ const user = new mongoose.Schema(
 // retrieves the length of the user's 
 // friends array field on query.
 
-module.exports = user;
+module.exports = User;

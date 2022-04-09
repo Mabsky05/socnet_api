@@ -1,0 +1,106 @@
+const { ObjectId } = require('mongoose').Types;
+const { User, Thought } = require('../models');
+
+// API Routes
+// /api/users
+
+// GET all users
+
+// GET a single user by its _id and populated thought and friend data
+
+// POST a new user:
+
+// // example data
+// {
+//   "username": "lernantino",
+//   "email": "lernantino@gmail.com"
+// }
+// PUT to update a user by its _id
+
+// DELETE to remove user by its _id
+
+// BONUS: Remove a user's associated thoughts when deleted.
+
+module.exports = {
+  // GET all users
+  getUser(req, res) {
+    User.find()
+      .then(async (users) => {
+        const userObj = {
+          users,
+        };
+        return res.json(userObj);
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json(err);
+      });
+  },
+
+  // GET a single user
+  getSingleUser(req, res) {
+    User.findOne({ _id: req.params.userId })
+      .select('-__v')
+      .then(async (user) =>
+        !user
+          ? res.status(404).json({ message: 'No user with that ID' })
+          : res.json({
+              student,
+              grade: await grade(req.params.studentId),
+            })
+      )
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json(err);
+      });
+  },
+
+  // POST a new user
+  createUser(req, res) {
+    User.create(req.body)
+      .then((user) => res.json(user))
+      .catch((err) => res.status(500).json(err));
+  },
+
+  // PUT update a user
+  updateUser(req, res) {
+    User.findOneAndUpdate(
+        { _id: req.params.courseId },
+        { $set: req.body },
+        { runValidators: true, new: true }
+            )
+          .then((course) =>
+            !course
+              ? res.status(404).json({ message: 'No course with this id!' })
+              : res.json(course)
+          )
+          .catch((err) => res.status(500).json(err));
+      },
+
+  // DELETE a user
+  deleteUser(req, res) {
+    Student.findOneAndRemove({ _id: req.params.studentId })
+      .then((student) =>
+        !student
+          ? res.status(404).json({ message: 'No such student exists' })
+          : Course.findOneAndUpdate(
+              { students: req.params.studentId },
+              { $pull: { students: req.params.studentId } },
+              { new: true }
+            )
+      )
+      .then((course) =>
+        !course
+          ? res.status(404).json({
+              message: 'Student deleted, but no courses found',
+            })
+          : res.json({ message: 'Student successfully deleted' })
+      )
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
+
+
+};
