@@ -78,13 +78,13 @@ module.exports = {
 
   // DELETE a user
   deleteUser(req, res) {
-    Student.findOneAndRemove({ _id: req.params.studentId })
-      .then((student) =>
-        !student
-          ? res.status(404).json({ message: 'No such student exists' })
+    user.findOneAndRemove({ _id: req.params.studentId })
+      .then((user) =>
+        !user
+          ? res.status(404).json({ message: 'That user does not exist' })
           : Course.findOneAndUpdate(
-              { students: req.params.studentId },
-              { $pull: { students: req.params.studentId } },
+              { users: req.params.userId },
+              { $pull: { users: req.params.userId } },
               { new: true }
             )
       )
