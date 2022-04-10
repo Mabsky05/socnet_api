@@ -1,6 +1,8 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
+// const assignmentSchema = require('./Assignment');
+// const mongoose = require('mongoose');
 
-const User = new mongoose.Schema(
+const userSchema = new Schema(
   {
     username: {
       type: String,
@@ -25,5 +27,8 @@ const User = new mongoose.Schema(
 // Create a virtual called friendCount that 
 // retrieves the length of the user's 
 // friends array field on query.
+
+const User = model('user', userSchema);
+
 
 module.exports = User;

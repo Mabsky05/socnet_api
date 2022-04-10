@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongoose').Types;
-const { User, Thought } = require('../models');
+const { user, Thought } = require('../models');
 
 // API Routes
 // /api/users
@@ -24,7 +24,7 @@ const { User, Thought } = require('../models');
 module.exports = {
   // GET all users
   getUser(req, res) {
-    User.find()
+    user.find()
       .then(async (users) => {
         const userObj = {
           users,
@@ -39,14 +39,13 @@ module.exports = {
 
   // GET a single user
   getSingleUser(req, res) {
-    User.findOne({ _id: req.params.userId })
+    user.findOne({ _id: req.params.userId })
       .select('-__v')
       .then(async (user) =>
         !user
           ? res.status(404).json({ message: 'No user with that ID' })
           : res.json({
-              student,
-              grade: await grade(req.params.studentId),
+              user,
             })
       )
       .catch((err) => {
@@ -57,14 +56,14 @@ module.exports = {
 
   // POST a new user
   createUser(req, res) {
-    User.create(req.body)
+    user.create(req.body)
       .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
 
   // PUT update a user
   updateUser(req, res) {
-    User.findOneAndUpdate(
+    user.findOneAndUpdate(
         { _id: req.params.courseId },
         { $set: req.body },
         { runValidators: true, new: true }
