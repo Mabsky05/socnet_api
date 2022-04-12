@@ -27,17 +27,19 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'thought',
     },
-  ],
+  ], 
         //array of _id values referencing User model (self-reference)
-    friends: {
+      friends:[ {
       type: Schema.Types.ObjectId,
       ref: 'user',
-
-    },
+    }, 
+  ], 
+},
+  {
     toJSON: {
-      virtuals: true,
-    },
-  },
+      getters: true,
+    }, 
+  }
 );
 // Create a virtual called friendCount that 
 // retrieves the length of the user's 

@@ -1,14 +1,18 @@
 const router = require('express').Router();
-const { thought, user } = require('../../models');
+const { 
+  getThought,  
+  getSingleThought,
+  createThought,
+  updateThought,
+  deleteThought 
+} = require('../../controllers/thoughtController');
 
+// /api/thoughts
+router.route('/').get(getThought).get(getSingleThought).post(createThought).put(updateThought).delete(deleteThought);
 
-router.get('/', async (req,res) => {
-  try { const thoughtData = await thought.findAll()
-      res.status(200).json(thoughtData);
-  } catch (err) {
-      res.status(500).json(err)
-  }
-});
+// /api/thoughts/:thoughtId/reactions
+router.route('/:thoughtId/reactions').get()//ADD HERE
+
 
 module.exports = router;
 
@@ -24,3 +28,6 @@ module.exports = router;
 
 // // /api/students/:studentId/assignments/:assignmentId
 // router.route('/:studentId/assignments/:assignmentId').delete(removeAssignment);
+
+  
+ 
