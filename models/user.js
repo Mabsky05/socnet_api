@@ -14,19 +14,42 @@ const userSchema = new Schema(
       type: String,
       unique: true,
       required: true,
-      //must match valid email address, see mongoose matching validation
+      validate: {
+        validator: function(v) {
+          return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
+        }, message: "Please enter valid email"
+      },
+      friends:[{type: Schema.Types.ObjectId, ref: 'user' }]
     },
-    thoughts: {
-      //array of _id values referencing Thought model
+          //array of _id values referencing Thought model,
+    thoughts: [
+      {
+      type: Schema.Types.ObjectId,
+      ref: 'thought',
     },
+  ],
+        //array of _id values referencing User model (self-reference)
     friends: {
-      //array of _id values referencing User model (self-reference)
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+
+    },
+    toJSON: {
+      virtuals: true,
     },
   },
 );
 // Create a virtual called friendCount that 
 // retrieves the length of the user's 
 // friends array field on query.
+userSchema.virtual('friendCount').get(function() {
+  return
+})
+
+// postSchema.virtual('commentCount').get(function () {
+//   return this.comments.length;
+// });
+
 
 const User = model('user', userSchema);
 
