@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const thought = new Schema(
+const thoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
@@ -9,14 +9,10 @@ const thought = new Schema(
       required: true,
     },
     createdAt: {
-      //set default to current timestamp
-      lastActiveAt: Date,
-
-      default: Date,
-
-      //getter method to format timestamp on query
-      // get: update,
-    },
+      type: Date,
+      default: Date.now,
+    },      
+    //getter method to format timestamp on query
     username: {
       type: String,
       required: true,
@@ -24,8 +20,15 @@ const thought = new Schema(
     reactions: {
       type: String,
       required: true,
-    }
+    },
+  }, {
+      toJSON: {
+      getters: true,
+    },
+    id: true,
   }
 );
 
-module.exports = thought;
+const Thought = model('thought', thoughtSchema);
+
+module.exports = Thought;
