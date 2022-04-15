@@ -38,10 +38,7 @@ connection.once('open', async () => {
   await user.collection.insertMany(users);
 
   // Add courses to the collection and await the results
-  // await Thought.collection.insertOne({
-  //   courseName: 'UCLA',
-  //   inPerson: false,
-  //   students: [...students],
+  await Thought.collection.insertOne()
   // });
 
   // Log out the seed data to indicate what should appear in the database

@@ -45,7 +45,7 @@ const userSchema = new Schema(
 // retrieves the length of the user's 
 // friends array field on query.
 userSchema.virtual('friendCount').get(function() {
-  return
+  return friends.length
 })
 
 // postSchema.virtual('commentCount').get(function () {
@@ -54,6 +54,6 @@ userSchema.virtual('friendCount').get(function() {
 
 
 const User = model('user', userSchema);
-
+//lowercase model = 'User'
 
 module.exports = User;
