@@ -1,6 +1,4 @@
 const { Schema, model } = require('mongoose');
-// const assignmentSchema = require('./Assignment');
-// const mongoose = require('mongoose');
 
 const userSchema = new Schema(
   {
@@ -41,19 +39,10 @@ const userSchema = new Schema(
     }, 
   }
 );
-// Create a virtual called friendCount that 
-// retrieves the length of the user's 
-// friends array field on query.
 userSchema.virtual('friendCount').get(function() {
   return friends.length
 })
 
-// postSchema.virtual('commentCount').get(function () {
-//   return this.comments.length;
-// });
-
-
 const User = model('user', userSchema);
-//lowercase model = 'User'
 
 module.exports = User;
