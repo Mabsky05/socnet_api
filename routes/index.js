@@ -8,10 +8,3 @@ router.use((req, res) => {
 });
 
 module.exports = router;
-
-// const apiRoutes = require('./api');
-// router.use('/api', apiRoutes);
-
-// router.use((req, res) => {
-//     res.send('Wrong route!')
-// });
