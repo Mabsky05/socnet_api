@@ -3,7 +3,7 @@
 ![alt text](Assets/sample.jpg)
 
 ## Video Walkthrough
-https://youtu.be/3lLjXxWZeG4
+https://www.youtube.com/watch?v=oSr_cLP2FHU
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -33,54 +33,45 @@ Insomnia installed<Br>
 NPM install: express
 <Br>
 
-### Execution: Seeding from root and Execution
-**Use MySQL to run 'source db/schema.sql' and establish database. 
-Run 'node seeds/index.js' to seed database.**   
-<Br>
-
 ### Execution: Insomnia
 Use the following method/address combinations to access/edit the application database:
 
-Access all products, categories or tags:<Br>
-GET: http://localhost:3001/api/products<Br>
-GET: http://localhost:3001/api/categories<Br>
-GET: http://localhost:3001/api/tags<Br>
-<Br>
-Access individual product, category, or tag, where X is the id of the item:<Br>
-GET: http://localhost:3001/api/products/X<Br>
-GET: http://localhost:3001/api/categories/X<Br>
-GET: http://localhost:3001/api/tags/X<Br>
-<Br>
-Post new product, category, or tag:<Br>
-POST: http://localhost:3001/api/products<Br>
-POST: http://localhost:3001/api/categories<Br>
-POST: http://localhost:3001/api/tags<Br>
-<Br>
-Update product, category, or tag, where x is the id of the item:<Br>
-PUT: http://localhost:3001/api/products/X<Br>
-PUT: http://localhost:3001/api/categories/X<Br>
-PUT: http://localhost:3001/api/tags/X<Br>
-<Br>
-Delete product, category, or tag, where x is the id of the item:<Br>
-DELETE: http://localhost:3001/api/products/X<Br>
-DELETE: http://localhost:3001/api/categories/X<Br>
-DELETE: http://localhost:3001/api/tags/X<Br>
-<Br>
+Thoughts:<Br>
+GET, POST: http://localhost:3001/api/thoughts<Br>
+GET/PUT/DEL single thought: http://localhost:3001/api/thoughts/:thoughtId<Br>
 
+Reactions:<Br>
+POST/DEL:  http://localhost:3001/api/thoughts/1/reactions<Br>
+
+Users:<Br>
+GET/POST: http://localhost:3001/api/users<Br>
+GET/PUT/DEL single user: http://localhost:3001/api/users/1<Br>
+
+Friends:<Br>
+POST/DEL: http://localhost:3001/api/users/1/friends/1<Br>
 
 ## Contact
 grimdango@gmail.com
 <Br>
 ## Log 
 
-### 19/03/22
-Completed. Added README. Cleaned up code. 
+### 16/04/22
+Comprehensive code revisions and testing on Insomnia
 
-### 10-17/03/22
-Adding and fixing routes.
+### 14/04/22
+Branches merged
 
-### 08/03/22
-Initiated project
+### 13/04/22
+Routes, seeds and schemas overhauled
+
+### 09/04/22
+Created branch for alternate routing 
+
+### 07/04/22
+Initial routing.
+
+### 06/04/22
+Initiated project, initial modelling.
 
    
 
