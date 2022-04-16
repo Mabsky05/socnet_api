@@ -18,14 +18,14 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      // get: timestamp => dateFormat(timestamp) npm i?
-      // comi=
-      //should be 
     }
-  }
+  }, {
+    toJSON: {
+    getters: true,
+  },
+  id: false,
+},
 );
-
-//toJSON, Id = false, see Thoughts model
 
 
 module.exports = reactionSchema;

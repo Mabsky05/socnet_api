@@ -25,7 +25,7 @@ module.exports = {
     console.log("----------------");
     console.log(req.body)
     Thought.create(req.body)
-      .then((thought) => res.json({message: "thoght successfully created"}))
+      .then((thought) => res.json({message: "Thought successfully created"}))
       .catch((err) => {
         console.log(err);
         return res.status(500).json(err);
@@ -72,29 +72,44 @@ module.exports = {
         !user
           ? res
               .status(404)
-              .json({ message: 'No user found with that ID :(' })
+              .json({ message: 'No thought found' })
           : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
   },
 
 // DELETE to remove reaction from a student
-  removeAssignment(req, res) {
-    Student.findOneAndUpdate(
-      { _id: req.params.studentId },
-      { $pull: { assignment: { assignmentId: req.params.assignmentId } } },
-      { runValidators: true, new: true }
-    )
-      .then((student) =>
-        !student
+  removeReaction(req, res) {
+    const react_id =  { _id: req.params.thoughtId };
+    const react_delete = { $pull: { reactions: req.body } };
+    Thought.findOneAndDelete(react_id, react_delete)
+      .then((user) =>
+        !user
           ? res
               .status(404)
-              .json({ message: 'No student found with that ID :(' })
+              .json({ message: 'No reaction found' })
           : res.json(student)
       )
       .catch((err) => res.status(500).json(err));
   },
 };
 
+// BACKUP CODE
+// removeReaction(req, res) {
+//   const react_id = 
+//   Thought.findOneAndDelete(
+//     { _id: req.params.userId },
+//     { $pull: { reactions: req.body } },
+//     { runValidators: true, new: true }
+//   )
+//     .then((user) =>
+//       !user
+//         ? res
+//             .status(404)
+//             .json({ message: 'No reaction found' })
+//         : res.json(student)
+//     )
+//     .catch((err) => res.status(500).json(err));
+// },
 
-// DELETE to pull and remove a reaction by the reaction's reactionId value
+

@@ -1,25 +1,6 @@
 const { ObjectId } = require('mongoose').Types;
 const { user, Thought } = require('../models');
 
-// API Routes
-// /api/users
-
-// GET all users
-
-// GET a single user by its _id and populated thought and friend data
-
-// POST a new user:
-
-// // example data
-// {
-//   "username": "lernantino",
-//   "email": "lernantino@gmail.com"
-// }
-// PUT to update a user by its _id
-
-// DELETE to remove user by its _id
-
-// BONUS: Remove a user's associated thoughts when deleted.
 
 module.exports = {
   // GET all users
@@ -100,6 +81,57 @@ module.exports = {
         res.status(500).json(err);
       });
   },
+
+  //POST add a friend
+  addFriend(req, res) {
+    user.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $addToSet: { friends: req.body } },
+      { runValidators: true, new: true }
+    )
+      .then((user) =>
+        !user
+          ? res
+              .status(404)
+              .json({ message: 'No user found' })
+          : res.json(user)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
+  //DELETE remove a friend
+  deleteFriend(req, res) {
+    const id_del = { _id: req.params.userId };
+    const id_addset = { $addToSet: { friends: req.body } }
+    user.findOneAndDelete( id_del, id_addset
+    )
+      .then((user) =>
+        !user
+          ? res
+              .status(404)
+              .json({ message: 'No user found' })
+          : res.json(user)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
+
+
+  // BACKUP CODE
+  // deleteFriend(req, res) {
+  //   user.findOneAndDelete(
+  //     { _id: req.params.userId },
+  //     { $addToSet: { friends: req.body } },
+  //     { runValidators: true, new: true }
+  //   )
+  //     .then((user) =>
+  //       !user
+  //         ? res
+  //             .status(404)
+  //             .json({ message: 'No user found' })
+  //         : res.json(user)
+  //     )
+  //     .catch((err) => res.status(500).json(err));
+  // },
 
 
 };
