@@ -23,7 +23,7 @@ const userSchema = new Schema(
     thoughts: [
       {
       type: Schema.Types.ObjectId,
-      ref: 'thought',
+      ref: 'Thought',
     },
   ], 
         //array of _id values referencing User model (self-reference)
@@ -35,13 +35,19 @@ const userSchema = new Schema(
 },
   {
     toJSON: {
-      getters: true,
+      getters: false,
+      virtuals:true
     }, 
+    id:true
   }
 );
-userSchema.virtual('friendCount').get(function() {
-  return friends.length
-})
+
+userSchema
+.virtual('friendCount')
+.get(function () {
+return this.friends
+});
+
 
 const User = model('user', userSchema);
 
