@@ -15,16 +15,30 @@ connection.once('open', async () => {
 
   // Create empty array to hold users
   const users = [];
+  const thoughts = [];
 
   // Get some random assignment objects using a helper function that we imported from ./data
-  const thoughts = getRandomThoughts(20);
+  
+  for (let i = 0; i < 10; i++) {
+    const thought = getRandomThoughts(20);
+    let username = getRandomUser();
+    const reactions = []
+
+    thoughts.push({
+      thought,
+      // createdAt,  
+      username,
+      reactions,
+    });
+  }
+
 
   // Loop 20 times -- add students to the students array
   for (let i = 0; i < 10; i++) {
     const username = getRandomUser();
-    const email = "placeholder"
-    const friends = "placeholder"
-    const thoughts = "placeholder"
+    const email = username + "@newmail.com"
+    const friends = []
+    const thoughts = []
 
     users.push({
       username,
@@ -37,8 +51,8 @@ connection.once('open', async () => {
   // Add students to the collection and await the results
   await user.collection.insertMany(users);
 
-  // Add courses to the collection and await the results
-  await Thought.collection.insertOne()
+  // Add thoughts to the collection and await the results
+  await Thought.collection.insertMany(thoughts)
   // });
 
   // Log out the seed data to indicate what should appear in the database

@@ -30,6 +30,9 @@ const thoughts = [
   'Smooooooth',
   'Chonkers',
   'Thumbs down',
+  'Thumbs up',
+  'Never gonna give you up',
+  'The OG!',
 ];
 
 // Get a random item given an array

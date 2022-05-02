@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongoose').Types;
 const { Thought, User } = require('../models');
 
 module.exports = {
@@ -18,7 +19,6 @@ module.exports = {
 
   // GET a thought
   getSingleThought(req, res) {
-    console.log("tonk")
     Thought.findOne({ _id: req.params.thoughtId })
       .select('-__v')
       .then( async (thought) =>
@@ -90,20 +90,20 @@ module.exports = {
 
 // DELETE to remove reaction from a thought
   removeReaction(req, res) {
-    // const react_id =  { _id: req.params.thoughtId };
-    // const react_delete = { $pull: { reactions: req.body } };
+    
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       // { $pull: { reactions: req.body } },
-      { $pull: { reaction: { reactionId: req.params.reactionId } } },
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },
       { runValidators: true, new: true }
       )
-      .then((user) =>
-        !user
+      
+      .then((thought) =>
+        !thought
           ? res
               .status(404)
               .json({ message: 'No reaction found' })
-          : res.json(user)
+          : res.json(thought)
       )
       .catch((err) => res.status(500).json(err));
   }

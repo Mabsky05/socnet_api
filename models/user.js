@@ -17,7 +17,6 @@ const userSchema = new Schema(
           return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
         }, message: "Please enter valid email"
       },
-      friends:[{type: Schema.Types.ObjectId, ref: 'user' }]
     },
           //array of _id values referencing Thought model,
     thoughts: [
@@ -38,7 +37,7 @@ const userSchema = new Schema(
       getters: false,
       virtuals:true
     }, 
-    id:true
+    id:false
   }
 );
 
