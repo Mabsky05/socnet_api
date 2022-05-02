@@ -18,3 +18,16 @@ db.once('open', () => {
     console.log(`API server running on port ${PORT}!`);
   });
 });
+
+//Issues
+//GET Thought (ID)
+//PUT Thought (ID)
+//DELETE Thought (ID)
+//POST Reaction
+//DELETE Reaction
+//GET User (ID)
+//UPDATE User (ID)
+//POST Friend
+//DELETE Friend
+
+
