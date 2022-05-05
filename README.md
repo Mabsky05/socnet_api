@@ -3,7 +3,7 @@
 ![alt text](Assets/sample.jpg)
 
 ## Video Walkthrough
-https://www.youtube.com/watch?v=oSr_cLP2FHU
+https://www.youtube.com/watch?v=dKINNIPKEA8
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
